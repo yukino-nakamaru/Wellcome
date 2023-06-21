@@ -14,7 +14,6 @@ include '../app//functions/review.php';
 // 口コミデータをそのデータに紐づくユーザー情報を取得する
 $product_id = $_GET['id'];
 $sql = "SELECT product_name FROM products WHERE product_id = $product_id";
-echo $sql;
 $reviews_data = fetch_reviews($product_id, $mysqli);
 // 口コミがある場合はループ処理を実行する
 if ( $reviews_data !== false ) {
