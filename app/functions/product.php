@@ -32,3 +32,33 @@ function fetch_products($mysqli) {
 	}
 
 }
+
+// 口コミを投稿する
+function add_review($product_id, $add_review, $mysqli) {
+	$product_id = $mysqli->real_escape_string($product_id);
+	$add_review = $mysqli->real_escape_string($add_review);
+	$user_id = $_SESSION['user'];
+
+	$query = "INSERT INTO
+					reviews(
+						review_comment,
+						review_date,
+						review_product_id,
+						review_user_id
+					)
+				VALUES (
+					'$add_review',
+					NOW(),
+					$product_id,
+					$user_id
+				)";
+
+	$result = $mysqli->query($query);
+
+	if(!$result) {
+		echo 'エラーが発生しました。';
+	} else {
+		echo "口コミを投稿しました。";
+	}
+
+}
