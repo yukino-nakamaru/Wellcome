@@ -21,7 +21,7 @@ function fetch_reviews($product_id, $mysqli) {
 					reviews.review_product_id = $product_id";
 
 	$result = $mysqli->query($query);
-
+	
 	if( !$result ) {
 		// エラーが発生した場合
 		exit;
@@ -40,6 +40,5 @@ function fetch_reviews($product_id, $mysqli) {
 			return $reviews_data;
 		}
 	}
-
 }
 
