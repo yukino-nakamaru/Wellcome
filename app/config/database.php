@@ -1,5 +1,5 @@
 <?php
-$host = "DESKTOP-833U5SB c:\xampp";
+$host = "localhost";
 $username = "root";
 $password = "yukino1371";
 $dbname = "kuchikomi";
