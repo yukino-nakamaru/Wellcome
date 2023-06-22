@@ -1,9 +1,9 @@
 <?php
 
-function save_user($user_name, $user_email, $user_password, $mysqli) {
+function save_user($user_name, $user_email, $user_password, $pdo) {
 
-	$user_name = $mysqli->real_escape_string($user_name);
-	$user_email = $mysqli->real_escape_string($user_email);
+	$user_name = $pdo->quote($user_name);
+	$user_email = $pdo->quote($user_email);
 	$user_password = password_hash($user_password, PASSWORD_DEFAULT);
 
 	$query = "INSERT INTO
@@ -13,12 +13,13 @@ function save_user($user_name, $user_email, $user_password, $mysqli) {
 						user_password
 					)
 				VALUES(
-					'$user_name',
-					'$user_email',
+					$user_name,
+					$user_email,
 					'$user_password'
 				)";
 
-	$result = $mysqli->query($query);
+
+	$result = $pdo->query($query);
 	echo "<div class='alert alert-success'>
 			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 			会員登録が完了しました</div>";

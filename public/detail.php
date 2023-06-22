@@ -10,11 +10,17 @@ include '../app//functions/review.php';
 	<hr>
 </div>
 
+
+
 <?php
+
+//データベース接続
+
 // 口コミデータをそのデータに紐づくユーザー情報を取得する
 $product_id = $_GET['id'];
-$sql = "SELECT product_name FROM products WHERE product_id = $product_id";
+$sql =  "SELECT product_name FROM products WHERE product_id = $stmt->bindParam(1, $product_id, PDO::PARAM_INT);"; 
 $reviews_data = fetch_reviews($product_id, $mysqli);
+
 // 口コミがある場合はループ処理を実行する
 if ( $reviews_data !== false ) {
 	foreach ($reviews_data as $review_data ) {

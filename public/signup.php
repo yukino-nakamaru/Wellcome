@@ -24,8 +24,14 @@ if ( $_POST ) {
 			$user_email = $_POST['user_email'];
 			$user_password = $_POST['user_password'];
 
+
+
+
+
+
+
 			// 会員登録する
-			save_user($user_name, $user_email, $user_password, $mysqli);
+			save_user($user_name, $user_email, $user_password, $pdo);
 		} else {
 			echo "パスワードが一致しません";
 		}
