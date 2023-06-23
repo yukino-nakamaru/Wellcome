@@ -1,6 +1,6 @@
 <?php
 
-function fetch_reviews($product_id, $mysqli) {
+function fetch_reviews($product_id, $pdo) {
 
 	// reviewsとusersのDBを選択する
 	$query ="SELECT
@@ -20,8 +20,7 @@ function fetch_reviews($product_id, $mysqli) {
 				WHERE
 					reviews.review_product_id = $product_id";
 
-	$result = $mysqli->query($query);
-	
+$result = $pdo->quote($query);	
 	if( !$result ) {
 		// エラーが発生した場合
 		exit;

@@ -19,18 +19,18 @@ function save_user($user_name, $user_email, $user_password, $pdo) {
 				)";
 
 
-	$result = $pdo->query($query);
+	$result = $pdo->quote($query);
 	echo "<div class='alert alert-success'>
 			<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 			会員登録が完了しました</div>";
 }
 
-function login_user($user_email, $user_password, $mysqli) {
-	$user_email = $mysqli->real_escape_string($user_email);
-	$user_password = $mysqli->real_escape_string($user_password);
+function login_user($user_email, $user_password,$pdo) {
 
-	$query = "SELECT
-					user_id,
+	$user_email = $pdo->quote($user_email);
+	$user_password = $pdo->quote($user_password);
+
+	$query = "SELECT INTO
 					user_email,
 					user_password
 				FROM
@@ -38,10 +38,12 @@ function login_user($user_email, $user_password, $mysqli) {
 				WHERE
 					user_email = '$user_email'";
 
-	$result = $mysqli->query($query);
+	$result = $pdo->quote($query);
+
+	
 
 	// パスワード(暗号化済み）とユーザーIDの取り出し
-	while ($row = $result->fetch_assoc()) {
+	while ($row = $result->pdo::fetch()) {
 		$db_hashed_pwd = $row['user_password'];
 		$user_id = $row['user_id'];
 	}

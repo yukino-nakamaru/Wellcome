@@ -19,7 +19,7 @@ if ( $_POST ) {
 		$user_password = $_POST['user_password'];
 
 		// ログインする
-		login_user($user_email, $user_password, $mysqli);
+		login_user($user_email, $user_password, $pdo);
 	} else {
 		echo "エラーがあります";
 	}
