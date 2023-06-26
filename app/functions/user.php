@@ -31,6 +31,7 @@ function login_user($user_email, $user_password,$pdo) {
 	$user_password = $pdo->quote($user_password);
 
 	$query = "SELECT INTO
+					user_id,
 					user_email,
 					user_password
 				FROM
@@ -40,14 +41,17 @@ function login_user($user_email, $user_password,$pdo) {
 
 	$result = $pdo->quote($query);
 
-	
+	// クエリの実行と結果の取得
+	$query = "SELECT * FROM users";
+	$stmt = $pdo->query($query);
 
 	// パスワード(暗号化済み）とユーザーIDの取り出し
-	while ($row = $result->pdo::fetch()) {
-		$db_hashed_pwd = $row['user_password'];
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+		$db_hashed_pwd = $row['db_hashed_pwd'];
 		$user_id = $row['user_id'];
+		var_dump($db_hashed_pwd);
 	}
-
+	
 	// ハッシュ化されたパスワードがマッチするかどうかを確認
 	if (password_verify($user_password, $db_hashed_pwd)) {
 		$_SESSION['user'] = $user_id;

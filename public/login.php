@@ -5,6 +5,7 @@ include '../app/functions/user.php';
 ?>
 
 <?php
+
 //  ログインボタンが押された時に下記を実行
 if ( $_POST ) {
 
@@ -25,6 +26,7 @@ if ( $_POST ) {
 	}
 
 }
+
  ?>
 
  <div class="col-xs-6 col-xs-offset-3">

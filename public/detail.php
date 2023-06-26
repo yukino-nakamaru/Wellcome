@@ -19,7 +19,7 @@ include '../app//functions/review.php';
 // 口コミデータをそのデータに紐づくユーザー情報を取得する
 $product_id = $_GET['id'];
 $sql =  "SELECT product_name FROM products WHERE product_id = $stmt->bindParam(1, $product_id, PDO::PARAM_INT);"; 
-$reviews_data = fetch_reviews($product_id, $mysqli);
+$reviews_data = fetch_reviews($product_id, $pdo);
 
 // 口コミがある場合はループ処理を実行する
 if ( $reviews_data !== false ) {
@@ -45,7 +45,7 @@ if ($_POST) {
 	// 必須項目に情報が入っているかを確認する
 	if ( !empty( $_POST['add_review'] )) {
 		$add_review = $_POST['add_review'];
-		add_review($product_id, $add_review, $mysqli);
+		add_review($product_id, $add_review, $pdo);
 	} else {
 		echo "口コミを入力してください";
 	}

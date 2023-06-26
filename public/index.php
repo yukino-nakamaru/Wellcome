@@ -26,7 +26,7 @@ include '../app/functions/product.php';
 
 <?php
 // 商品一覧データを取得
-$products_data = fetch_products($mysqli);
+$products_data = fetch_products($pdo);
 foreach ($products_data as $product_data ) {
 ?>
 
