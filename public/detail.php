@@ -10,21 +10,32 @@ include '../app//functions/review.php';
 	<hr>
 </div>
 
-
-
 <?php
 
-//データベース接続
+$query =  "SELECT 
+				product_name, 
+				product_id 
+			FROM 
+				products 
+			WHERE 
+				product_id";
+
+$result = $pdo->quote($query);
+
+// クエリの実行と結果の取得
+$query = "SELECT * FROM users";
+$stmt = $pdo->query($query);
 
 // 口コミデータをそのデータに紐づくユーザー情報を取得する
-$product_id = $_GET['id'];
-$sql =  "SELECT product_name FROM products WHERE product_id = $stmt->bindParam(1, $product_id, PDO::PARAM_INT);"; 
-$reviews_data = fetch_reviews($product_id, $pdo);
+$product_id = $_GET['product_id'];
 
+
+$reviews_data = fetch_reviews($product_id, $pdo);
 // 口コミがある場合はループ処理を実行する
 if ( $reviews_data !== false ) {
 	foreach ($reviews_data as $review_data ) {
 	?>
+
 
 	<div class="col-xs-12">
 		<h4>
