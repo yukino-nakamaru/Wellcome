@@ -67,7 +67,7 @@ if ($_POST) {
 	<div class="row">
 		 <div class="col-xs-12">
 		 	<h3>口コミを投稿する</h3>
-			<form>
+			<form action="GET">
 				<textarea name="add_review" class="form-control" placeholder="口コミを記入してください。"></textarea>
 				<button type="submit" class="btn btn-default">投稿する</button>
 			</form>
