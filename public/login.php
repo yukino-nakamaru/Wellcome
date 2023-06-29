@@ -31,7 +31,7 @@ if ( $_POST ) {
 
  <div class="col-xs-6 col-xs-offset-3">
  	<h2>ログイン</h2>
-	<form action="" method="post">
+	<form action="index.php" method="post">
 		<div class="form-group">
 			<label for="user_email">Email</label>
 			<input type="email" class="form-control" id="user_email" name="user_email">

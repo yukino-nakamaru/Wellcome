@@ -23,15 +23,10 @@ if ( $_POST ) {
 			$user_name = $_POST['user_name'];
 			$user_email = $_POST['user_email'];
 			$user_password = $_POST['user_password'];
-
-
-
-
-
-
-
+			
 			// 会員登録する
 			save_user($user_name, $user_email, $user_password, $pdo);
+
 		} else {
 			echo "パスワードが一致しません";
 		}
@@ -45,7 +40,7 @@ if ( $_POST ) {
 
  <div class="col-xs-6 col-xs-offset-3">
  	<h2>会員登録</h2>
-	<form action="" method="post">
+	<form action="login.php" method="post">
 		<div class="form-group">
 			<label for="user_name">名前</label>
 			<input type="text" class="form-control" id="user_name" name="user_name">

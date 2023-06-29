@@ -1,7 +1,7 @@
 <?php
 include '../app/config/database.php';
 include '../public/view/header.php';
-include '../app//functions/review.php';
+include '../app/functions/review.php';
 ?>
 
 <div class="col-xs-12">
@@ -13,29 +13,25 @@ include '../app//functions/review.php';
 <?php
 
 $query =  "SELECT 
-				product_name, 
-				product_id 
+				product_name
 			FROM 
-				products 
+				products
 			WHERE 
-				product_id";
+				product_id =  $product_name";
 
 $result = $pdo->quote($query);
 
 // クエリの実行と結果の取得
-$query = "SELECT * FROM users";
+$query = "SELECT * FROM  products";
 $stmt = $pdo->query($query);
 
 // 口コミデータをそのデータに紐づくユーザー情報を取得する
-$product_id = $_GET['product_id'];
-
-
+$product_id = $_POST['product_name'];
 $reviews_data = fetch_reviews($product_id, $pdo);
 // 口コミがある場合はループ処理を実行する
 if ( $reviews_data !== false ) {
 	foreach ($reviews_data as $review_data ) {
 	?>
-
 
 	<div class="col-xs-12">
 		<h4>
@@ -60,14 +56,14 @@ if ($_POST) {
 	} else {
 		echo "口コミを入力してください";
 	}
-}
- ?>
+ }
+?>
 
 <div class="container">
 	<div class="row">
 		 <div class="col-xs-12">
 		 	<h3>口コミを投稿する</h3>
-			<form action="GET">
+			<form action="index.php" method="post">
 				<textarea name="add_review" class="form-control" placeholder="口コミを記入してください。"></textarea>
 				<button type="submit" class="btn btn-default">投稿する</button>
 			</form>
@@ -75,5 +71,5 @@ if ($_POST) {
 	</div>
 </div>
 
-<?php
+<?php 
 include '../public/view/footer.php';
