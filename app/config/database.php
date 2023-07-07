@@ -3,7 +3,7 @@
 $DB['host'] = 'localhost';
 $DB['user'] = 'root';
 $DB['pass'] = 'yukino1371';
-$DB['name'] = 'kuchikomi';
+$DB['name'] = 'kuchikomi_new';
 
 //接続
 $dsn = "mysql:dbname={$DB['name']};host={$DB['host']}";
