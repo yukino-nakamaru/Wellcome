@@ -1,6 +1,6 @@
 <?php
 
-function fetch_products($mysqli) {
+function fetch_products($pdo) {
 
 	// productsのDBを選択する
 	 $query = "SELECT
@@ -10,20 +10,25 @@ function fetch_products($mysqli) {
 	 			FROM
 	 				products";
 
-	$result = $mysqli->query($query);
+	$result = $pdo->quote($query);
+
+	// クエリの実行と結果の取得
+	$query = "SELECT * FROM products";
+	$stmt = $pdo->query($query);
 
 	if( !$result ) {
 		// エラーが発生した場合
 		exit;
 	} else {
 		// カテゴリーが存在しない場合
-		if( mysqli_num_rows($result) == 0 ){
+		if($row = $stmt->fetch(PDO::FETCH_ASSOC) == 0 ){
 			exit;
 		}else {
+
 			// エラーがない場合
 			// 連想配列にデータを格納する
 			$products_data = array();
-			while ($row = $result->fetch_assoc()) {
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$products_data[] = $row;
 			}
 
@@ -34,9 +39,9 @@ function fetch_products($mysqli) {
 }
 
 // 口コミを投稿する
-function add_review($product_id, $add_review, $mysqli) {
-	$product_id = $mysqli->real_escape_string($product_id);
-	$add_review = $mysqli->real_escape_string($add_review);
+function add_review($product_id, $add_review, $pdo) {
+	$product_id = $pdo->quote($product_id);
+	$add_review = $pdo->quote($add_review);
 	$user_id = $_SESSION['user'];
 
 	$query = "INSERT INTO
@@ -53,7 +58,7 @@ function add_review($product_id, $add_review, $mysqli) {
 					$user_id
 				)";
 
-	$result = $mysqli->query($query);
+	$result = $pdo->quote($query);
 
 	if(!$result) {
 		echo 'エラーが発生しました。';

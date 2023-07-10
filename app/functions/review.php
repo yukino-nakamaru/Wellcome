@@ -20,19 +20,24 @@ function fetch_reviews($product_id, $pdo) {
 				WHERE
 					reviews.review_product_id = $product_id";
 
-$result = $pdo->quote($query);	
+				$result = $pdo->quote($query);	
+
+				// クエリの実行と結果の取得
+				$query = "SELECT * FROM reviews";
+				$stmt = $pdo->query($query);
+
 	if( !$result ) {
 		// エラーが発生した場合
 		exit;
 	} else {
-		if( mysqli_num_rows($result) == 0 ){
+		if( $row = $stmt->fetch(PDO::FETCH_ASSOC) == 0 ){
 			// 口コミが存在しない場合
 			return false;
 		}else {
 			// エラーがない場合
 			// 連想配列にデータを格納する
 			$reviews_data = array();
-			while ($row = $result->fetch_assoc()) {
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$reviews_data[] = $row;
 			}
 
