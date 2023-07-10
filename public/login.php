@@ -5,6 +5,12 @@ include '../app/functions/user.php';
 ?>
 
 <?php
+function login_user($user_email, $user_password, $pdo){
+
+	$user_email = $pdo->quote($user_email);
+	$user_password = $pdo->quote($user_password);
+
+}
 //  ログインボタンが押された時に下記を実行
 if ( $_POST ) {
 
@@ -19,12 +25,19 @@ if ( $_POST ) {
 		$user_password = $_POST['user_password'];
 
 		// ログインする
-		login_user($user_email, $user_password, $pdo);
+		login_user($user_email, $user_password,$pdo);
+
+		$msg = 'ログインしました。';
+        $link = '<a href="index.php">ホーム</a>';
+
 	} else {
 		echo "エラーがあります";
+
+		$msg = 'エラーがあります。';
+        $link = '<a href="login.php">戻る</a>';
+}
 	}
 
-}
  ?>
 
  <div class="col-xs-6 col-xs-offset-3">
