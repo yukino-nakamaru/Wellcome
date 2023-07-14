@@ -1,4 +1,4 @@
-<?php
+ <?php
     session_start();
      $dsn='mysql:dbname=reviewsite;charset=utf8';
      $user='root';
@@ -55,7 +55,7 @@
             }
         }
     }
-?>
+?> 
 
 <div class="col-xs-12">
 		<h4>
@@ -64,3 +64,30 @@
 		</h4>
 		<p><?php echo $date['review_comment']; ?></p>
 	</div>
+
+    <?php
+// 口コミの投稿
+if ($_POST) {
+
+	// 必須項目に情報が入っているかを確認する
+	if ( !empty( $_POST['review_comment'] )) {
+		$comment = $_POST['review_comment'];
+		add_review($product_id, $review_comment, $pdo);
+	} else {
+		echo "口コミを入力してください";
+	}
+ }
+?>
+
+
+    <div class="container">
+	<div class="row">
+		 <div class="col-xs-12">
+		 	<h3>口コミを投稿する</h3>
+			<form action="input.php" method="post">
+				<textarea name="review_comment" class="form-control" placeholder="口コミを記入してください。"></textarea>
+				<button type="submit" class="btn btn-default">投稿する</button>
+			</form>
+		 </div>
+	</div>
+</div>
