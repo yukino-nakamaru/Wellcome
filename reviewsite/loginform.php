@@ -10,7 +10,7 @@
         $id = $_POST['user_id'];
         $name = $_POST['user_name'];
         $mail = $_POST['user_email'];
-        password_hash($_POST['user_password'], PASSWORD_DEFAULT);
+        $password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
 
         $sql = "SELECT * FROM users WHERE user_email = :user_email";
         $stmt = $dbh->prepare($sql);
