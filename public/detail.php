@@ -17,7 +17,7 @@ $query =  "SELECT
 			FROM 
 				products
 			WHERE 
-				product_id =  $product_name";
+				product_id =  'product_name'";
 
 $result = $pdo->quote($query);
 

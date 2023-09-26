@@ -5,78 +5,55 @@
      $pass='yukino1371';
      $dbh = new PDO($dsn,$user,$pass);
 
-    if(isset($_POST['users'])) {
-        $id = $_POST['user_id'];
-        $name = $_POST['user_name'];
-        $mail = $_POST['user_email'];
-        $password = password_hash($_POST['user_password'], PASSWORD_DEFAULT);
+	 $sql =  "SELECT 
+					 product_name
+				 FROM 
+					 products
+				 WHERE 
+					 product_id =  'product_name'";
+	 
+	$stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':user_email', $mail);
+    $stmt->execute();
+    $member = $stmt->fetch();
 
-        if(isset($_POST['products'])) {
-            $id = $_POST['product_id'];
-            $name = $_POST['product_name'];
-            $description = $_POST['product_description'];
-            $cat = $_POST['product_cat'];
-
-            if(isset($_POST['reviews'])) {
-                $id = $_POST['review_id'];
-                $comment = $_POST['review_comment'];
-                $date = $_POST['review_date'];
-                $product_id = $_POST['review_product_id'];
-                $user_id = $_POST['review_user_id'];
-
-                $sql = "SELECT * FROM users ";
-                $stmt = $dbh->prepare($sql);
-                $stmt->bindValue(':user_id', $id);
-                $stmt->bindValue(':user_name', $name);
-                $stmt->bindValue(':user_email', $mail);
-                $stmt->bindValue(':user_password', $password);
-                $stmt->execute();
-                $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                $sql = "SELECT * FROM products ";
-                $stmt = $dbh->prepare($sql);
-                $stmt->bindValue(':product_id', $id);
-                $stmt->bindValue(':product_name', $name);
-                $stmt->bindValue(':product_description', $description);
-                $stmt->bindValue(':product_cat', $cat);
-                $stmt->execute();
-                $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                $sql = "SELECT * FROM reviews ";
-                $stmt = $dbh->prepare($sql);
-                $stmt->bindValue(':review_id', $id);
-                $stmt->bindValue(':review_comment', $comment);
-                $stmt->bindValue(':review_date', $date);
-                $stmt->bindValue(':review_product_id', $product_id);
-                $stmt->bindValue(':review_user_id', $user_id);
-                $stmt->execute();
-                $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            }
-        }
-    }
-?> 
-
-<div class="col-xs-12">
-		<h4>
-			名前：<?php echo $name['user_name']; ?>さん
-			（<?php echo $date['review_date']; ?>）
-		</h4>
-		<p><?php echo $date['review_comment']; ?></p>
-	</div>
-
-    <?php
-// 口コミの投稿
-if ($_POST) {
-
-	// 必須項目に情報が入っているかを確認する
-	if ( !empty( $_POST['review_comment'] )) {
-		$comment = $_POST['review_comment'];
-		add_review($product_id, $review_comment, $pdo);
-	} else {
-		echo "口コミを入力してください";
-	}
- }
+	 // クエリの実行と結果の取得
+	 $query = "SELECT * FROM  products";
+	 $stmt = $pdo->query($query);
+	 
+	 // 口コミデータをそのデータに紐づくユーザー情報を取得する
+	 $product_id = $_POST['product_name'];
+	 $reviews_data = fetch_reviews($product_id, $pdo);
+	 // 口コミがある場合はループ処理を実行する
+	 if ( $reviews_data !== false ) {
+		 foreach ($reviews_data as $review_data ) {
+		 ?>
+	 
+		 <div class="col-xs-12">
+			 <h4>
+				 名前：<?php echo $review_data['user_name']; ?>さん
+				 （<?php echo $review_data['review_date']; ?>）
+			 </h4>
+			 <p><?php echo $review_data['review_comment']; ?></p>
+		 </div>
+	 
+		 <?php } // End of foreach ?>
+	 
+	 <?php } // End of if ?>
+	 
+	 <?php
+	 // 口コミの投稿
+	 if ($_POST) {
+	 
+		 // 必須項目に情報が入っているかを確認する
+		 if ( !empty( $_POST['add_review'] )) {
+			 $add_review = $_POST['add_review'];
+			 add_review($product_id, $add_review, $pdo);
+		 } else {
+			 echo "口コミを入力してください";
+		 }
+	  }
+	 ?> 
 ?>
 
 
