@@ -5,7 +5,7 @@
 <title>Let's enjoy eating!</title>
 <style type="text/css">
 body {background-color: pink;}
-p {font-size: 20px; color: purple;}
+p {font-size: 23px; color: purple;}
 </style>
 </head>
 <body>

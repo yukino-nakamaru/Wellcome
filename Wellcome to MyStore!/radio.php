@@ -5,7 +5,7 @@
 <title>お食事の選択</title>
 <style type="text/css">
 body {background-color: pink;}
-p {font-size: 25px; color: purple;}
+p {font-size: 28px; color: purple;}
 </style>
 </head>
 <body>

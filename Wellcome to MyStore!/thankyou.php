@@ -5,7 +5,7 @@
 <title>Thank you for coming to My Store!</title>
 <style type="text/css">
 body {background-color: ivory;}
-p {font-size: 22px; color: skyblue;}
+p {font-size: 25px; color: skyblue;}
 </style>
 </head>
 <body>

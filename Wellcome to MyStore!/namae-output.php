@@ -5,7 +5,7 @@
 <title>Wellcome!</title>
 <style type="text/css">
 body {background-color: pink;}
-p {font-size: 30px; color: purple;}
+p {font-size: 33px; color: purple;}
 </style>
 </head>
 <body>

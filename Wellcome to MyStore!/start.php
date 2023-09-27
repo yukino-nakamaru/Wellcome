@@ -6,7 +6,7 @@
 
 <style type="text/css">
 body {background-color: ivory;}
-p {font-size: 25px; color: tomato;}
+p {font-size: 28px; color: tomato;}
 </style>
 </head>
 <body>

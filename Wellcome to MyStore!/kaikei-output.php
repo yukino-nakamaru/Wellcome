@@ -5,7 +5,7 @@
 <title>お会計</title>
 <style type="text/css">
 body {background-color: pink;}
-p {font-size: 17px; color: purple;}
+p {font-size: 20px; color: purple;}
 </style>
 </head>
 <body>
